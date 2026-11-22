@@ -2,8 +2,11 @@ server:
   port: 8081
 
 spring:
+  config:
+    import: optional:configserver:http://localhost:8888
   application:
     name: inventory-service
+
 
   datasource:
     url: jdbc:mysql://localhost:3306/commerce_db
@@ -19,3 +22,12 @@ spring:
 axon:
   axonserver:
     servers: localhost:8124
+
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
