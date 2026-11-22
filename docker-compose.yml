@@ -1,0 +1,35 @@
+
+services:
+
+  axon-server:
+    image: axoniq/axonserver:latest
+    container_name: axon-server
+    ports:
+      - "8024:8024"
+      - "8124:8124"
+    environment:
+      AXONIQ_AXONSERVER_DEVMODE_ENABLED: "true"
+    volumes:
+      - axon-data:/data
+      - axon-events:/eventdata
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-commerce
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: commerce_db
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  axon-data:
+  axon-events:
+  mysql-data:
