@@ -39,13 +39,13 @@ public class ProductAggregate {
 
     @EventSourcingHandler
     public void on(ProductCreatedEvent event) {
-        this.productId = event.productId();
-        this.name = event.name();
-        this.price = event.price();
-        this.quantity = event.quantity();
-        this.categoryId = event.categoryId();
+        this.productId = event.getProductId();
+        this.name = event.getName();
+        this.price = event.getPrice();
+        this.quantity = event.getQuantity();
+        this.categoryId = event.getCategoryId();
 
-        this.status = event.quantity() > 0
+        this.status = event.getQuantity() > 0
                 ? ProductStatus.AVAILABLE
                 : ProductStatus.OUT_OF_STOCK;
     }

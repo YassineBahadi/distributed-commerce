@@ -34,8 +34,8 @@ public class CategoryAggregate {
 
     @EventSourcingHandler
     public void on(CategoryCreatedEvent event) {
-        this.categoryId = event.categoryId();
-        this.name = event.name();
-        this.description = event.description();
+        this.categoryId = event.getCategoryId();
+        this.name = event.getName();
+        this.description = event.getDescription();
     }
 }
